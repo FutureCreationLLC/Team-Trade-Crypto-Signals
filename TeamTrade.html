@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Team Trade Crypto Signals</title>
+<style>
+:root{--bg:#f0e90a;--card:#0f1418;--muted:#f300b2;--accent:#00f0ff;--accent2:#8aff7a;--danger:#ff6b6b;--glass:rgba(255,255,255,0.03)}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#f212393a,#eb0a);color:#ef5}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(circle at 15% 10%, rgba(0,255,255,0.02) 0 2px, transparent 2px),radial-gradient(circle at 80% 70%, rgba(138,255,122,0.015) 0 3px, transparent 3px);mix-blend-mode:overlay}
+.container{max-width:980px;margin:28px auto;padding:20px;position:relative;z-index:2}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.brand h1{margin:0;font-size:20px;color:var(--accent)}.tag{font-size:12px;color:var(--muted);padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border-radius:12px;padding:18px;box-shadow:0 6px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
+.home-grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
+.center{display:flex;align-items:center;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg,rgba(255,255,255,0.015),rgba(255,255,255,0.01));cursor:pointer;color:#061018;font-weight:700}
+.btn.green{background:linear-gradient(180deg,#00e6ff,#00bcd4);color:#021014}
+.btn.blue{background:linear-gradient(180deg,#6ea2ff,#fbff);color:#fff}
+.muted{color:var(--muted);font-size:13px}
+.form{display:grid;gap:10px;margin-top:14px}
+.input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);color:#fbff}
+.side{position:sticky;top:22px}
+.price-big{font-weight:700;font-size:22px;color:var(--accent)}
+.neon-badge{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:10px;background:linear-gradient(90deg,rgba(0,255,255,0.06),rgba(138,255,122,0.04));color:#021014;font-weight:700}
+.hidden{display:none}
+.small{font-size:13px;color:var(--muted)}
+.tickers{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.ticker{min-width:140px;padding:10px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03)}
+.sym{font-weight:700}
+.signal-list{margin-top:12px}
+.signal-item{padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border-left:4px solid rgba(255,255,255,0.03);margin-bottom:10px;cursor:pointer}
+.signal-item.buy{border-left-color:var(--accent2)}
+.signal-item.sell{border-left-color:var(--danger)}
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:999}
+.modal-card{background:#081018;padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);max-width:520px;width:94%}
+.close-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--muted)}
+.footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.back-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--muted)}
+@media(max-width:880px){.home-grid{grid-template-columns:1fr}.side{position:static}}
+</style>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand">
+      <h1>Team Trade Crypto Signals</h1>
+      <div class="tag">Manual signals • BTC payments • Access code</div>
+    </div>
+    <div class="muted">No passwords • Send proof to email or WhatsApp after payment</div>
+  </div>
+
+  <div class="home-grid">
+    <main class="card" id="screens">
+
+      <div id="screen-home">
+        <h2 style="margin:0">Welcome</h2>
+        <div class="small" style="margin-top:6px">Trade signals updated manually. Pay in Bitcoin for 1 week access.</div>
+        <div class="nav">
+          <button class="btn green" id="toRegister">Become a Member</button>
+          <button class="btn blue" id="toLogin">Already a Member</button>
+          <button class="btn" id="toPrices">Live Prices</button>
+          <button class="btn" id="toSignals">Signals</button>
+        </div>
+      </div>
+
+      <div id="screen-register" class="hidden">
+        <h2>Register</h2>
+        <form id="regForm" class="form" onsubmit="return false;">
+          <input id="rName" class="input" type="text" placeholder="Full name" required>
+          <input id="rEmail" class="input" type="email" placeholder="Email" required>
+          <input id="rPhone" class="input" type="tel" placeholder="Phone number" required>
+          <div style="display:flex;gap:8px">
+            <button class="btn green" id="regNextBtn">Next</button>
+            <button class="back-btn" id="regBack">Back</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="screen-payment" class="hidden">
+        <h2>Payment</h2>
+        <div class="small">Pay GHS 10 in Bitcoin. After payment send proof to email or WhatsApp to receive your access code.</div>
+        <div style="margin-top:12px">
+          <div class="small">Bitcoin address</div>
+          <div style="display:flex;gap:8px;margin-top:6px">
+            <input id="btcAddress" class="input" value="bc1qYOURBTCADDRESS" />
+            <button class="btn" id="copyAddressBtn">Copy</button>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <div class="small">Email: payments@example.com</div>
+          <div class="small" style="margin-top:6px">WhatsApp: +233535630101</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button class="btn green" id="paidBtn">I've Paid (Request Code)</button>
+          <button class="back-btn" id="payBack">Back</button>
+        </div>
+        <div id="paidAck" class="small" style="margin-top:10px;display:none"></div>
+      </div>
+
+      <div id="screen-login" class="hidden">
+        <h2>Member Login</h2>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <input id="codeInput" class="input" placeholder="TSCS001" />
+          <button class="btn blue" id="unlockBtn">Unlock</button>
+        </div>
+        <div id="codeMsg" class="small" style="margin-top:8px"></div>
+        <div style="margin-top:12px">
+          <button class="back-btn" id="loginBack">Back</button>
+        </div>
+      </div>
+
+      <div id="screen-prices" class="hidden">
+        <h2>Live Prices</h2>
+        <div>
+          <button class="btn" id="refreshPrices">Refresh</button>
+          <button class="back-btn" id="pricesBack">Back</button>
+        </div>
+        <div class="tickers" id="pricesContainer"></div>
+        <div class="small" id="pricesUpdated" style="margin-top:8px"></div>
+      </div>
+
+      <div id="screen-signals" class="hidden">
+        <h2>Signals</h2>
+        <button class="back-btn" id="signalsBack">Back</button>
+        <div class="signal-list" id="signalsContainer"></div>
+      </div>
+
+    </main>
+
+    <aside class="side">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div class="small">BITCOIN</div>
+            <div class="price-big" id="topBTC">--</div>
+            <div class="small" id="topBTCChange"></div>
+            <div class="small">ETHEREUM</div>
+            <div class="price-big" id="topBtc">--</div>
+            <div class="small" id="topETHChange"></div>
+          </div>
+          
+        </div>
+      </div>
+    </aside>
+  </div>
+  <div class="footer">⚠️ Not financial advice. Trading involves risk.</div>
+</div>
+
+<div id="modal" class="hidden"></div>
+
+<script>
+const ACCESS_CODES = ["TSCS001","TSCS002","TSCS003","Rankid","Momentum"];
+const SIGNALS = [
+  {pair:"BTC/USD",type:"BUY",open:"65200",tp:"67000",sl:"64500",note:"Momentum play",status:"Active"},
+  
+  {pair:"ETH/USD",type:"SELL",open:"3520",tp:"3400",sl:"3580",note:"Retrace expected",status:"Active"},
+  
+  {pair:"UAX/USD",type:"BUY",open:"420",tp:"460",sl:"400",note:"Breakout",status:"Active"}
+  
+];
+const COINS = [{id:"bitcoin",sym:"BTC"},{id:"ethereum",sym:"ETH"},{id:"binancecoin",sym:"BNB"}];
+
+const screens=["screen-home","screen-register","screen-payment","screen-login","screen-prices","screen-signals"];
+function showScreen(id){screens.forEach(s=>document.getElementById(s).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");}
+
+document.getElementById("toRegister").onclick=()=>showScreen("screen-register");
+document.getElementById("toLogin").onclick=()=>showScreen("screen-login");
+document.getElementById("toPrices").onclick=()=>{showScreen("screen-prices");loadPrices()};
+document.getElementById("toSignals").onclick=()=>showScreen("screen-login");
+document.getElementById("regBack").onclick=()=>showScreen("screen-home");
+document.getElementById("payBack").onclick=()=>showScreen("screen-home");
+document.getElementById("loginBack").onclick=()=>showScreen("screen-home");
+document.getElementById("pricesBack").onclick=()=>showScreen("screen-home");
+document.getElementById("signalsBack").onclick=()=>showScreen("screen-home");
+document.getElementById("regNextBtn").onclick=()=>showScreen("screen-payment");
+
+document.getElementById("copyAddressBtn").onclick=()=>{navigator.clipboard.writeText(document.getElementById("btcAddress").value).then(()=>alert("Copied"))};
+document.getElementById("paidBtn").onclick=()=>{document.getElementById("paidAck").style.display="block";document.getElementById("paidAck").textContent="Send proof to email or WhatsApp to receive your access code."};
+
+document.getElementById("unlockBtn").onclick=()=>{const v=document.getElementById("codeInput").value.trim();if(ACCESS_CODES.includes(v)){showScreen("screen-signals");renderSignals();document.getElementById("codeMsg").textContent="";}else{document.getElementById("codeMsg").textContent="Invalid code"}};
+
+function renderSignals(){const c=document.getElementById("signalsContainer");c.innerHTML="";SIGNALS.forEach(s=>{const el=document.createElement("div");el.className="signal-item "+(s.type==="BUY"?"buy":"sell");el.innerHTML="<div><div style='font-weight:700'>"+s.pair+" — "+s.type+"</div><div class='small'>"+s.note+"</div></div>";el.onclick=()=>showSignal(s);c.appendChild(el)})}
+
+function showSignal(s){const m=document.getElementById("modal");m.innerHTML="<div class='modal'><div class='modal-card'><div style='display:flex;justify-content:space-between;align-items:center'><div style='font-weight:900'>"+s.pair+" — "+s.type+"</div><button class='close-btn' id='closeModal'>Close</button></div><hr style='border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0'><div><div class='small'>Open: "+s.open+"</div><div class='small'>TP: "+s.tp+"</div><div class='small'>SL: "+s.sl+"</div><div class='small'>"+s.status+"</div></div></div></div>";m.classList.remove("hidden");document.getElementById("closeModal").onclick=()=>{m.classList.add("hidden");m.innerHTML=""};}
+
+async function loadPrices(){try{const ids=COINS.map(c=>c.id).join(",");const res=await fetch("https://api.coingecko.com/api/v3/simple/price?ids="+ids+"&vs_currencies=usd,ghs&include_24hr_change=true");const d=await res.json();const pc=document.getElementById("pricesContainer");pc.innerHTML="";COINS.forEach(c=>{const p=d[c.id]?.usd;const ch=d[c.id]?.usd_24h_change?.toFixed(2);const el=document.createElement("div");el.className="ticker";el.innerHTML="<div><div class='sym'>"+c.sym+"</div><div class='small'>$"+p+" ("+ch+"%)</div></div>";pc.appendChild(el)});document.getElementById("topBTC").textContent="$"+d.bitcoin.usd;document.getElementById("topBTCChange").textContent="24h "+d.bitcoin.usd_24h_change.toFixed(2)+"%";}catch(e){document.getElementById("pricesUpdated").textContent="Update failed"}}
+
+document.getElementById("refreshPrices").onclick=loadPrices;
+showScreen("screen-home");loadPrices();setInterval(loadPrices,30000);
+</script>
+</body>
+</html>
